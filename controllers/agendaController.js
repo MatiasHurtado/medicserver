@@ -25,9 +25,10 @@ exports.CrearAgenda= async (req,res) =>{
 exports.ObtenerAgendas = async (req,res) =>{
     try{
         const valor = (req.body)
-        const agendas = await Agenda.find({estado:valor.estado})
+        const agendas = await Agenda.find({estado:valor.estado}).populate('medico').populate('cliente')
+        // const agendas = await Agenda.findById({_id:valor._id}).populate('medico')
         res.json({agendas})
-        console.log(valor)
+     
     }catch (error){
         console.log(error);
         res.status(500).send('Hubo un error')
