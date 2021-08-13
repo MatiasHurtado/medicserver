@@ -16,4 +16,7 @@ router.put('/:id',
     
     agendaController.AsignarAgenda
 )
+router.delete('/:id',
+    agendaController.EliminarAgenda
+)
 module.exports = router;

@@ -3,7 +3,6 @@ const Agenda = require('../models/Agenda')
 exports.CrearAgenda= async (req,res) =>{
 
     try {
-
         const  agenda = new Agenda(req.body)
         agenda.save()
         res.json(agenda)
@@ -15,9 +14,6 @@ exports.CrearAgenda= async (req,res) =>{
     }
 
 
-
-
-
 }
 
 
@@ -25,7 +21,7 @@ exports.CrearAgenda= async (req,res) =>{
 exports.ObtenerAgendas = async (req,res) =>{
     try{
         const valor = (req.body)
-        const agendas = await Agenda.find({estado:valor.estado}).populate('medico').populate('cliente')
+        const agendas = await Agenda.find({estado:valor.estado,medico:valor.medico}).populate('medico').populate('cliente')
         // const agendas = await Agenda.findById({_id:valor._id}).populate('medico')
         res.json({agendas})
      
@@ -69,4 +65,28 @@ exports.AsignarAgenda = async (req, res) =>{
     } catch (error) {
         console.log(error)
     }
+}
+
+exports.EliminarAgenda = async(req, res)=>{
+
+
+    try {
+    console.log(req.params.id)
+    //Revisamos si la agenda existe
+    let agenda = await Agenda.findById(req.params.id)
+
+    //Si La agenda existe
+     if(!agenda){
+    return res.status(404).json({msg:'Agenda no encontrada'})
+    }
+
+    //Eliminamos La agenda
+     await  Agenda.findByIdAndRemove({_id: req.params.id})
+     res.json({msg:'Agenda Eliminada'})
+        
+    } catch (error) {
+         console.log(error)
+        res.status(500).send('Error en el servidor')
+     }
+
 }
