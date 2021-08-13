@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
-
+const medicoController = require('../controllers/medicoControlller')
 router.get('/',
     
-    console.log("hola mundo")
+    medicoController.ObtenerMedicos
 )
 module.exports = router;

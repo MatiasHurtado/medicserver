@@ -5,6 +5,7 @@ const Cliente = require('./models/Cliente')
 const Medico = require('./models/Medico')
 const Agenda = require('./models/Agenda');
 const { Mongoose } = require('mongoose');
+const cors= require('cors')
 
 //Creamos el servidor
 const app = express();
@@ -12,7 +13,9 @@ const app = express();
 //Conectar a la base de datos
 conectarDB();
 
-
+//Habilitamos Cors
+app.use(cors())
+    
 const PORT = process.env.PORT || 4000;
 
 
@@ -21,20 +24,25 @@ const PORT = process.env.PORT || 4000;
 app.use(express.json({extended:true}));
 
 //Creacion de usuario de prueba
-// Cliente.create(
+//  Cliente.create(
 //     {
-//         nombre:'Marcelo',
-//         correo:'Marcelo@correo.cl',
+//          nombre:'Marcelo',
+//          correo:'Marcelo@correo.cl',
 //         password:'123123'
-//     }
+//      }
 // )
 //Creacion de Medico de prueba
-// Medico.create(
-//      {
-//          nombre:'Fernando Herrera',
-//          especialidad:'Dentista'
-//     }
-//  )
+
+const crearMedico = () =>{
+
+    Medico.create(
+        {
+          nombre:'Raul Ramirez ',
+         especialidad:'Kinesiologia'
+        }
+    )
+}
+// crearMedico()
 
 const crearHora = ()=>{
     Agenda.create({
@@ -72,6 +80,7 @@ const buscarHora= async ()=>{
 
 
 app.use('/api/agendas', require('./routes/agendas'));
+app.use('/api/medicos', require('./routes/medicos'));
 
 
 app.listen(PORT,() =>{
