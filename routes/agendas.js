@@ -7,8 +7,7 @@ const agendaController = require('../controllers/agendaController')
 router.post('/',
     agendaController.CrearAgenda
 )
-router.get('/',
-    
+router.get('/:medico/:estado',
     agendaController.ObtenerAgendas
 )
 

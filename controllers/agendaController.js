@@ -20,7 +20,8 @@ exports.CrearAgenda= async (req,res) =>{
 
 exports.ObtenerAgendas = async (req,res) =>{
     try{
-        const valor = (req.body)
+        const valor = (req.params)
+        
         const agendas = await Agenda.find({estado:valor.estado,medico:valor.medico}).populate('medico').populate('cliente')
         // const agendas = await Agenda.findById({_id:valor._id}).populate('medico')
         res.json({agendas})
@@ -34,30 +35,25 @@ exports.AsignarAgenda = async (req, res) =>{
 
     try {
         //Revisamos la agenda
-        let agenda= await Agenda.findById(req.params.id)
-        console.log(agenda)
+        // let agenda= await Agenda.findById(req.params.id)
+       
+        
+        
+
+        // console.log(agenda)
+      //Verificamos si la agenda existe
+     
+
+        //Actualizamos la agenda
         const {estado,cliente} = req.body
 
         const nuevaAgenda = {};
 
-        if(estado){
-            nuevaAgenda.estado = estado
-        }if(cliente){
-            nuevaAgenda.cliente = cliente
-        }
-
+        nuevaAgenda.estado = estado
+        nuevaAgenda.cliente = cliente
         
-      //Verificamos si la agenda existe
-       if(!agenda){
-           console.log("aa")
-            return res.status(404).json({msg:'Agenda no encontrada'})
-         
-        }
-
-        //Actualizamos la agenda
-
-        agenda = await Agenda.findByIdAndUpdate({_id:req.params.id},{$set:nuevaAgenda})
-        console.log("paso3")
+        let agenda = await Agenda.findOneAndUpdate({_id : req.params.id}, nuevaAgenda, {new:true})
+        // console.log(agenda)
         res.json({agenda})
 
 

@@ -15,7 +15,7 @@ conectarDB();
 
 //Habilitamos Cors
 app.use(cors())
-    
+
 const PORT = process.env.PORT || 4000;
 
 
@@ -46,13 +46,12 @@ const crearMedico = () =>{
 
 const crearHora = ()=>{
     Agenda.create({
-        fecha:"01/06/2021",
-        medico:mongoose.Types.ObjectId("61130d3de053a031d8f63beb"),
-        cliente:mongoose.Types.ObjectId("61130b0552cda631f865a1d0"),
+        fecha:"11/02/2021",
+        medico:mongoose.Types.ObjectId("6115d8a6f7573c4ff0d3e26d"),
         estado:false,
     })
 }
-// crearHora()
+
 const buscarHora= async ()=>{
 
     //1-Padre
