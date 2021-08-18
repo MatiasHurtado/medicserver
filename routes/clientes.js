@@ -1,7 +1,25 @@
-const express = require('express')
+const express = require('express');
+const authController = require('../controllers/authController');
+const auth = require('../middleware/auth');
 const router = express.Router()
 
-router.get('/',
-    console.log("hola mundo")
+
+
+
+
+router.post('/',
+    authController.crearCliente
 )
+
+
+router.post('/auth',
+    authController.autenticarUsuario
+)
+
+//Obtiene el usuario autenticado
+router.get('/',
+    auth,
+    authController.usuarioAutenticado
+)
+
 module.exports = router;

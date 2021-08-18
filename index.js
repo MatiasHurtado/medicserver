@@ -44,13 +44,9 @@ const crearMedico = () =>{
 }
 // crearMedico()
 
-const crearHora = ()=>{
-    Agenda.create({
-        fecha:"11/02/2021",
-        medico:mongoose.Types.ObjectId("6115d8a6f7573c4ff0d3e26d"),
-        estado:false,
-    })
-}
+ 
+
+
 
 const buscarHora= async ()=>{
 
@@ -80,6 +76,7 @@ const buscarHora= async ()=>{
 
 app.use('/api/agendas', require('./routes/agendas'));
 app.use('/api/medicos', require('./routes/medicos'));
+app.use('/api/auth', require('./routes/clientes'));
 
 
 app.listen(PORT,() =>{

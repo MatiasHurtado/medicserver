@@ -4,6 +4,7 @@ const agendasSchema = mongoose.Schema({
     fecha:{
         type:Date,
         require:true
+        
     },
     medico:{
         type:mongoose.Schema.Types.ObjectId,
